@@ -10,31 +10,39 @@ document.getElementById('fetch-btn').addEventListener('click', async () => {
   output.innerHTML = "<p>Loading...</p>";
 
   try {
-    const response = await fetch(`http://localhost:3000/fetch-html?url=${encodeURIComponent(url)}`);
+    // Correct Render URL
+    const response = await fetch(`https://project-folder-5hxu.onrender.com/fetch-html?url=${encodeURIComponent(url)}`);
+    
+    if (!response.ok) {
+      throw new Error(`Server responded with status ${response.status}`);
+    }
+
     const html = await response.text();
 
     // Parse the full HTML page
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
 
-    // Remove junk elements
+    // Remove unwanted elements
     doc.querySelectorAll('script, style, img, iframe, svg, link, picture, noscript, header, footer, nav, aside, form, button').forEach(el => el.remove());
 
-    // Optional: remove hyperlinks but keep text
+    // Replace <a> with <span> to keep text but remove links
     doc.querySelectorAll('a').forEach(a => {
       const span = document.createElement('span');
       span.innerHTML = a.innerHTML;
       a.replaceWith(span);
     });
 
-    // Keep main content only if available
+    // Use main content if available
     const main = doc.querySelector('main') || doc.body;
 
-    // Only keep blocks with meaningful length
+    // Filter for meaningful content
     const elements = Array.from(main.querySelectorAll('p, h1, h2, h3, li, blockquote'))
       .filter(el => el.innerText.trim().length > 50);
 
-    const cleanHTML = elements.map(el => `<${el.tagName.toLowerCase()}>${el.innerText.trim()}</${el.tagName.toLowerCase()}>`).join('\n');
+    const cleanHTML = elements
+      .map(el => `<${el.tagName.toLowerCase()}>${el.innerText.trim()}</${el.tagName.toLowerCase()}>`)
+      .join('\n');
 
     output.innerHTML = cleanHTML || "<p>Couldn't extract readable content.</p>";
   } catch (err) {
