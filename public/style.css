@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+  padding: 2rem;
+  background: #fafafa;
+}
+
+#app {
+  max-width: 800px;
+  margin: auto;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+#output {
+  white-space: pre-wrap;
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  min-height: 300px;
+}

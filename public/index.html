@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Article Extractor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Article Text Extractor</h1>
+
+    <div class="instructions">
+      <p>Paste a URL to a news article or webpage and click <strong>"Fetch Article"</strong>.</p>
+      <p>If you prefer manual HTML, press <kbd>Ctrl + U</kbd> on any webpage to view the source, then copy and paste it here.</p>
+    </div>
+
+    <input type="text" id="url-input" placeholder="Enter website URL..." />
+    <button id="fetch-btn">Fetch Article</button>
+
+    <div id="output"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
