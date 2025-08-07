@@ -1,10 +1,14 @@
 // server.js
 const express = require('express');
 const fetch = require('node-fetch');
+const cors = require('cors'); // ✅ Import CORS
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// ✅ Enable CORS
+app.use(cors());
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
